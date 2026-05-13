@@ -5,113 +5,120 @@
     --bg-gray: #f2f5f8;
 }
 
+* { box-sizing: border-box; }
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     background-color: var(--bg-gray);
     margin: 0;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    overflow: hidden; /* Evita scroll para que parezca una app */
+    /* Forzamos a que el cuerpo sea exactamente el alto de la ventana */
+    height: 100vh; 
+    overflow: hidden;
 }
 
 header {
     background: white;
-    padding: 10px 30px;
+    padding: 5px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 5px solid var(--cimer-blue);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-bottom: 3px solid var(--cimer-blue);
+    height: 10vh; /* Bajamos un poco el alto del header */
 }
 
-#main-logo { height: 65px; }
+#main-logo { height: 80%; }
 
 .page-info {
     font-weight: bold;
     color: var(--cimer-blue);
+    font-size: 1rem;
     background: #e7eff6;
-    padding: 8px 20px;
-    border-radius: 30px;
+    padding: 4px 15px;
+    border-radius: 20px;
 }
 
 #barcode-grid {
     flex-grow: 1;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
-    grid-template-rows: repeat(2, 1fr);    /* 2 filas (6 por pantalla) */
-    gap: 20px;
-    padding: 25px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px; /* Menos espacio entre tarjetas */
+    padding: 10px;
+    height: 75vh; /* Reservamos el 75% del alto para los códigos */
 }
 
 .card {
     background: white;
-    border: 2px solid #dce4eb;
-    border-radius: 15px;
+    border: 1px solid #dce4eb;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: 15px;
-    transition: transform 0.2s, border-color 0.2s;
-}
-
-.card:hover {
-    border-color: var(--cimer-gold);
-    transform: translateY(-2px);
+    padding: 8px;
+    /* Evitamos que la tarjeta crezca más de su celda */
+    max-height: 100%; 
 }
 
 .card h2 {
     margin: 0;
-    font-size: 0.95rem;
+    font-size: 0.85rem; /* Letra un poco más chica para que no ocupe tanto */
     color: #333;
     text-align: center;
-    line-height: 1.2;
-    height: 40px; /* Asegura alineación */
-    display: flex;
-    align-items: center;
+    text-transform: uppercase;
 }
 
 .sku-label {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: monospace;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--cimer-blue);
     background: #f8f9fa;
-    padding: 4px 12px;
+    padding: 2px 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
 
 svg {
     width: 100%;
-    max-height: 100px;
+    /* Reducimos el alto máximo del código de barras */
+    max-height: 80px; 
 }
 
 .navigation {
+    height: 15vh; /* El 15% restante para los botones */
     display: flex;
-    justify-content: space-between;
-    padding: 15px 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 5px 20px;
     background: white;
     border-top: 1px solid #ddd;
 }
 
-.nav-btn {
-    padding: 15px 40px;
-    font-size: 1.1rem;
+.nav-btn-main {
+    flex-grow: 1;
+    max-width: 450px;
+    height: 70%;
+    font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
     border: none;
     border-radius: 10px;
-    color: white;
-    transition: opacity 0.2s;
+    background-color: var(--cimer-gold);
+    color: var(--dark-blue);
+    text-transform: uppercase;
 }
 
-#prevBtn { background-color: var(--cimer-blue); }
-#nextBtn { background-color: var(--cimer-gold); color: var(--dark-blue); }
-
-.nav-btn:disabled {
-    background-color: #bdc3c7;
-    cursor: not-allowed;
-    opacity: 0.5;
+.nav-btn-sec {
+    height: 70%;
+    padding: 0 25px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid var(--cimer-blue);
+    border-radius: 10px;
+    background: white;
+    color: var(--cimer-blue);
 }
