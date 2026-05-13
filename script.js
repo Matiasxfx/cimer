@@ -12,7 +12,7 @@ const productos = [
     { sku: "R470114", nombre: "TUERCA REFORZADA 1/4 PARA CAÑO 1/4" },
     { sku: "R470124", nombre: "TUERCA REFORZADA 3/8 PARA CAÑO 3/8" },
     { sku: "R997598", nombre: "DOBLADORA DE CAÑO 1/4 5/16 3/8 180º" },
-    { sku: "R232008", nombre: "JUNTA PASA CAÑO 60 MM BLANCA" },
+    { sku: "R232008", nombre: "JUNTA PASA CAÑO 60 MM DESARMABLE BLANCA" },
     { sku: "R946670", nombre: "TERMOSTATO NO FROST GAFA ATB" },
     { sku: "R997561", nombre: "PINZA REPARADORA DE CAÑO" },
     { sku: "R997565", nombre: "DOBLADOR INTERNO PARA CAÑERIAS 4M" },
@@ -23,7 +23,6 @@ const productos = [
     { sku: "R971061", nombre: "KIT ELITY ACOPLE RAPIDO CAÑO" }
 ];
 
-// Configuración: 6 productos por pantalla
 const itemsPorPagina = 6;
 let paginaActual = 0;
 
@@ -34,8 +33,6 @@ const nextBtn = document.getElementById('nextBtn');
 
 function mostrarPantalla(index) {
     grid.innerHTML = "";
-    
-    // Calcular rango de productos
     const inicio = index * itemsPorPagina;
     const fin = inicio + itemsPorPagina;
     const subset = productos.slice(inicio, fin);
@@ -43,31 +40,30 @@ function mostrarPantalla(index) {
     subset.forEach((p, i) => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `
-            <h2>${p.nombre}</h2>
-            <svg id="barcode-${i}"></svg>
-            <div class="sku-label">${p.sku}</div>
-        `;
+        card.innerHTML = `<h2>${p.nombre}</h2><svg id="barcode-${i}"></svg><div class="sku-label">${p.sku}</div>`;
         grid.appendChild(card);
 
-        // Generar barra usando el SKU
         JsBarcode(`#barcode-${i}`, p.sku, {
             format: "CODE128",
             width: 2,
             height: 70,
-            displayValue: false, // Oculto porque ya lo ponemos abajo en grande
-            lineColor: "#000"
+            displayValue: false
         });
     });
 
-    // Actualizar botones e indicador
     label.innerText = `PANTALLA ${index + 1} DE ${Math.ceil(productos.length / itemsPorPagina)}`;
     prevBtn.disabled = index === 0;
     nextBtn.disabled = fin >= productos.length;
 }
 
-prevBtn.onclick = () => { paginaActual--; mostrarPantalla(paginaActual); };
-nextBtn.onclick = () => { paginaActual++; mostrarPantalla(paginaActual); };
+// Navegación por botones
+prevBtn.onclick = () => { if(paginaActual > 0) mostrarPantalla(--paginaActual); };
+nextBtn.onclick = () => { if(paginaActual < Math.ceil(productos.length/itemsPorPagina)-1) mostrarPantalla(++paginaActual); };
 
-// Carga inicial
+// Navegación por teclado (Flechas)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' && !nextBtn.disabled) nextBtn.click();
+    if (e.key === 'ArrowLeft' && !prevBtn.disabled) prevBtn.click();
+});
+
 mostrarPantalla(paginaActual);
