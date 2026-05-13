@@ -13,7 +13,6 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    /* Forzamos a que el cuerpo sea exactamente el alto de la ventana */
     height: 100vh; 
     overflow: hidden;
 }
@@ -25,7 +24,7 @@ header {
     justify-content: space-between;
     align-items: center;
     border-bottom: 3px solid var(--cimer-blue);
-    height: 10vh; /* Bajamos un poco el alto del header */
+    height: 10vh;
 }
 
 #main-logo { height: 80%; }
@@ -44,9 +43,9 @@ header {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 10px; /* Menos espacio entre tarjetas */
+    gap: 10px;
     padding: 10px;
-    height: 75vh; /* Reservamos el 75% del alto para los códigos */
+    height: 75vh;
 }
 
 .card {
@@ -58,13 +57,12 @@ header {
     justify-content: space-around;
     align-items: center;
     padding: 8px;
-    /* Evitamos que la tarjeta crezca más de su celda */
     max-height: 100%; 
 }
 
 .card h2 {
     margin: 0;
-    font-size: 0.85rem; /* Letra un poco más chica para que no ocupe tanto */
+    font-size: 0.85rem;
     color: #333;
     text-align: center;
     text-transform: uppercase;
@@ -83,12 +81,11 @@ header {
 
 svg {
     width: 100%;
-    /* Reducimos el alto máximo del código de barras */
     max-height: 80px; 
 }
 
 .navigation {
-    height: 15vh; /* El 15% restante para los botones */
+    height: 15vh;
     display: flex;
     justify-content: center;
     align-items: center;
