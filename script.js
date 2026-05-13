@@ -40,30 +40,59 @@ function mostrarPantalla(index) {
     subset.forEach((p, i) => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `<h2>${p.nombre}</h2><svg id="barcode-${i}"></svg><div class="sku-label">${p.sku}</div>`;
+        card.innerHTML = `
+            <h2>${p.nombre}</h2>
+            <svg id="barcode-${i}"></svg>
+            <div class="sku-label">${p.sku}</div>
+        `;
         grid.appendChild(card);
 
         JsBarcode(`#barcode-${i}`, p.sku, {
             format: "CODE128",
             width: 2,
             height: 70,
-            displayValue: false
+            displayValue: false,
+            lineColor: "#000"
         });
     });
 
     label.innerText = `PANTALLA ${index + 1} DE ${Math.ceil(productos.length / itemsPorPagina)}`;
-    prevBtn.disabled = index === 0;
-    nextBtn.disabled = fin >= productos.length;
+    
+    // Deshabilitar botones si no hay más páginas
+    prevBtn.disabled = (index === 0);
+    nextBtn.disabled = (fin >= productos.length);
 }
 
-// Navegación por botones
-prevBtn.onclick = () => { if(paginaActual > 0) mostrarPantalla(--paginaActual); };
-nextBtn.onclick = () => { if(paginaActual < Math.ceil(productos.length/itemsPorPagina)-1) mostrarPantalla(++paginaActual); };
+// Eventos de los botones (Clic manual)
+prevBtn.onclick = () => {
+    if (paginaActual > 0) {
+        paginaActual--;
+        mostrarPantalla(paginaActual);
+    }
+};
 
-// Navegación por teclado (Flechas)
+nextBtn.onclick = () => {
+    if (paginaActual < Math.ceil(productos.length / itemsPorPagina) - 1) {
+        paginaActual++;
+        mostrarPantalla(paginaActual);
+    }
+};
+
+// Control por Teclado (Optimizado para Smart TV)
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' && !nextBtn.disabled) nextBtn.click();
-    if (e.key === 'ArrowLeft' && !prevBtn.disabled) prevBtn.click();
-});
+    if (e.key === 'ArrowRight') {
+        if (!nextBtn.disabled) {
+            e.preventDefault(); // Detiene el movimiento del foco de la tele
+            nextBtn.click();
+        }
+    }
+    if (e.key === 'ArrowLeft') {
+        if (!prevBtn.disabled) {
+            e.preventDefault(); // Detiene el movimiento del foco de la tele
+            prevBtn.click();
+        }
+    }
+}, { passive: false });
 
+// Carga inicial
 mostrarPantalla(paginaActual);
