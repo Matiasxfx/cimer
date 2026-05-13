@@ -1,0 +1,117 @@
+:root {
+    --cimer-blue: #004B93;
+    --cimer-gold: #F5B800;
+    --dark-blue: #002d5a;
+    --bg-gray: #f2f5f8;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-gray);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; /* Evita scroll para que parezca una app */
+}
+
+header {
+    background: white;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 5px solid var(--cimer-blue);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#main-logo { height: 65px; }
+
+.page-info {
+    font-weight: bold;
+    color: var(--cimer-blue);
+    background: #e7eff6;
+    padding: 8px 20px;
+    border-radius: 30px;
+}
+
+#barcode-grid {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    grid-template-rows: repeat(2, 1fr);    /* 2 filas (6 por pantalla) */
+    gap: 20px;
+    padding: 25px;
+}
+
+.card {
+    background: white;
+    border: 2px solid #dce4eb;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+    border-color: var(--cimer-gold);
+    transform: translateY(-2px);
+}
+
+.card h2 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #333;
+    text-align: center;
+    line-height: 1.2;
+    height: 40px; /* Asegura alineación */
+    display: flex;
+    align-items: center;
+}
+
+.sku-label {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--cimer-blue);
+    background: #f8f9fa;
+    padding: 4px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+svg {
+    width: 100%;
+    max-height: 100px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background: white;
+    border-top: 1px solid #ddd;
+}
+
+.nav-btn {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    transition: opacity 0.2s;
+}
+
+#prevBtn { background-color: var(--cimer-blue); }
+#nextBtn { background-color: var(--cimer-gold); color: var(--dark-blue); }
+
+.nav-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
