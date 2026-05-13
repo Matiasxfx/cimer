@@ -25,74 +25,61 @@ const productos = [
 
 const itemsPorPagina = 6;
 let paginaActual = 0;
+const totalPaginas = Math.ceil(productos.length / itemsPorPagina);
 
 const grid = document.getElementById('barcode-grid');
 const label = document.getElementById('page-label');
 const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
+const loopBtn = document.getElementById('loopBtn');
 
 function mostrarPantalla(index) {
     grid.innerHTML = "";
     const inicio = index * itemsPorPagina;
-    const fin = inicio + itemsPorPagina;
-    const subset = productos.slice(inicio, fin);
+    const subset = productos.slice(inicio, inicio + itemsPorPagina);
 
     subset.forEach((p, i) => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `
-            <h2>${p.nombre}</h2>
-            <svg id="barcode-${i}"></svg>
-            <div class="sku-label">${p.sku}</div>
-        `;
+        card.innerHTML = `<h2>${p.nombre}</h2><svg id="barcode-${i}"></svg><div class="sku-label">${p.sku}</div>`;
         grid.appendChild(card);
 
         JsBarcode(`#barcode-${i}`, p.sku, {
             format: "CODE128",
             width: 2,
-            height: 70,
+            height: 60,
             displayValue: false,
             lineColor: "#000"
         });
     });
 
-    label.innerText = `PANTALLA ${index + 1} DE ${Math.ceil(productos.length / itemsPorPagina)}`;
-    
-    // Deshabilitar botones si no hay más páginas
-    prevBtn.disabled = (index === 0);
-    nextBtn.disabled = (fin >= productos.length);
+    label.innerText = `PANTALLA ${index + 1} DE ${totalPaginas}`;
+    prevBtn.style.visibility = (index === 0) ? "hidden" : "visible";
 }
 
-// Eventos de los botones (Clic manual)
-prevBtn.onclick = () => {
+const avanzarOBuclerear = () => {
+    paginaActual = (paginaActual < totalPaginas - 1) ? paginaActual + 1 : 0;
+    mostrarPantalla(paginaActual);
+};
+
+const retroceder = () => {
     if (paginaActual > 0) {
         paginaActual--;
         mostrarPantalla(paginaActual);
     }
 };
 
-nextBtn.onclick = () => {
-    if (paginaActual < Math.ceil(productos.length / itemsPorPagina) - 1) {
-        paginaActual++;
-        mostrarPantalla(paginaActual);
-    }
-};
+loopBtn.onclick = avanzarOBuclerear;
+prevBtn.onclick = retroceder;
 
-// Control por Teclado (Optimizado para Smart TV)
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') {
-        if (!nextBtn.disabled) {
-            e.preventDefault(); // Detiene el movimiento del foco de la tele
-            nextBtn.click();
-        }
+    if (e.key === 'ArrowRight' || e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        avanzarOBuclerear();
     }
     if (e.key === 'ArrowLeft') {
-        if (!prevBtn.disabled) {
-            e.preventDefault(); // Detiene el movimiento del foco de la tele
-            prevBtn.click();
-        }
+        e.preventDefault();
+        retroceder();
     }
-}, { passive: false });
+});
 
-// Carga inicial
 mostrarPantalla(paginaActual);
