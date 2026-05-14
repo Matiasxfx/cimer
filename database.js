@@ -9,6 +9,7 @@ const paginasManuales = [
             { sku: "R969012", nombre: "AIS NEGRA 3/8 TIRA 6MM" },
             { sku: "R969013", nombre: "AIS NEGRA 1/2 TIRA 6MM" },
             { sku: "R782070", nombre: "CABLES 5 X 1.5" },
+            { sku: "R767802", nombre: "MANGUERA CRISTAL X MT 14X18   },
             { sku: "R124545", nombre: "CINTA S/ PEGAMENTO BLANCA" }
            
         ]
@@ -74,8 +75,9 @@ const paginasManuales = [
     {
         titulo: "ACCESORIOS INSTALACIÓN",
         productos: [
-            { sku: "R767820", nombre: "MANGUERA CRISTAL ROLLO 25 M." },
+            
             { sku: "R767801", nombre: "MANGUERA CRISTAL X MT 12X16" },
+            { sku: "R767802", nombre: "MANGUERA CRISTAL X MT 14X18   },
             { sku: "R488110", nombre: "100 PRECINTOS 20 CM NEGROS" },
             { sku: "R488103", nombre: "100 PRECINTOS 200 MM BLANCOS" },
             { sku: "R146125", nombre: "100 TACOS LOCK BLANCOS" },
