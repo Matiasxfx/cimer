@@ -78,8 +78,8 @@ const paginasManuales = [
             
             { sku: "R767801", nombre: "MANGUERA CRISTAL X MT 12X16" },
             { sku: "R767802", nombre: "MANGUERA CRISTAL X MT 14X18"   },
-            { sku: "R488110", nombre: "100 PRECINTOS 20 CM NEGROS" },
-            { sku: "R488103", nombre: "100 PRECINTOS 200 MM BLANCOS" },
+            { sku: "R767803", nombre: "MANGUERA CRISTAL X MT 16X20"   },
+            { sku: "R243008", nombre: "PRECINTOS POR UNIDAD BLANCO  20 CM"   },         
             { sku: "R146125", nombre: "100 TACOS LOCK BLANCOS" },
             { sku: "R124545", nombre: "CINTA S/ PEGAMENTO BLANCA" }
         ]
