@@ -1,43 +1,23 @@
-const productos = [
-    { sku: "R567408", nombre: "KG. CAÑO 1/2 ROLLO DE COBRE" },
-    { sku: "R567402", nombre: "KG. CAÑO 1/4 ROLLO DE COBRE" },
-    { sku: "R567406", nombre: "KG. CAÑO 3/8 ROLLO DE COBRE" },
-    { sku: "R567410", nombre: "KG. CAÑO 5/8 ROLLO DE COBRE" },
-    { sku: "R567412", nombre: "KG. CAÑO 3/4 ROLLO DE COBRE" },
-    { sku: "R965102", nombre: "DOBLADORA DE CAÑO 5/8" },
-    { sku: "R567404", nombre: "KG. CAÑO 5/16 ROLLO DE COBRE" },
-    { sku: "R470132", nombre: "TUERCA REFORZADA 1/2 PARA CAÑO 1/2" },
-    { sku: "R965096", nombre: "DOBLADORA DE CAÑO 1/2" },
-    { sku: "R567367", nombre: "CAÑO RIGIDO EN TIRA 1 1/8\"" },
-    { sku: "R470114", nombre: "TUERCA REFORZADA 1/4 PARA CAÑO 1/4" },
-    { sku: "R470124", nombre: "TUERCA REFORZADA 3/8 PARA CAÑO 3/8" },
-    { sku: "R997598", nombre: "DOBLADORA DE CAÑO 1/4 5/16 3/8 180º" },
-    { sku: "R232008", nombre: "JUNTA PASA CAÑO 60 MM DESARMABLE BLANCA" },
-    { sku: "R946670", nombre: "TERMOSTATO NO FROST GAFA ATB" },
-    { sku: "R997561", nombre: "PINZA REPARADORA DE CAÑO" },
-    { sku: "R997565", nombre: "DOBLADOR INTERNO PARA CAÑERIAS 4M" },
-    { sku: "R997549", nombre: "EXPANSOR DE CAÑO P/ TALADRO" },
-    { sku: "R567414", nombre: "KG. CAÑO 7/8 ROLLO DE COBRE" },
-    { sku: "R567364", nombre: "CAÑO RIGIDO EN TIRA 3/4\"" },
-    { sku: "R470130", nombre: "TUERCA REFORZADA 1/2 PARA CAÑO 3/8" },
-    { sku: "R971061", nombre: "KIT ELITY ACOPLE RAPIDO CAÑO" }
-];
-
-const itemsPorPagina = 6;
 let paginaActual = 0;
-const totalPaginas = Math.ceil(productos.length / itemsPorPagina);
 
 const grid = document.getElementById('barcode-grid');
 const label = document.getElementById('page-label');
+const tituloHeader = document.getElementById('seccion-titulo');
 const prevBtn = document.getElementById('prevBtn');
 const loopBtn = document.getElementById('loopBtn');
 
 function mostrarPantalla(index) {
-    grid.innerHTML = "";
-    const inicio = index * itemsPorPagina;
-    const subset = productos.slice(inicio, inicio + itemsPorPagina);
+    // Verifica que los datos existan antes de continuar
+    if (typeof paginasManuales === 'undefined' || !paginasManuales[index]) {
+        console.error("No se encontraron los datos en database.js");
+        return;
+    }
 
-    subset.forEach((p, i) => {
+    grid.innerHTML = "";
+    const paginaData = paginasManuales[index];
+    tituloHeader.innerText = paginaData.titulo;
+
+    paginaData.productos.forEach((p, i) => {
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `<h2>${p.nombre}</h2><svg id="barcode-${i}"></svg><div class="sku-label">${p.sku}</div>`;
@@ -46,18 +26,18 @@ function mostrarPantalla(index) {
         JsBarcode(`#barcode-${i}`, p.sku, {
             format: "CODE128",
             width: 2,
-            height: 60,
+            height: 50,
             displayValue: false,
             lineColor: "#000"
         });
     });
 
-    label.innerText = `PANTALLA ${index + 1} DE ${totalPaginas}`;
+    label.innerText = `PANTALLA ${index + 1} DE ${paginasManuales.length}`;
     prevBtn.style.visibility = (index === 0) ? "hidden" : "visible";
 }
 
 const avanzarOBuclerear = () => {
-    paginaActual = (paginaActual < totalPaginas - 1) ? paginaActual + 1 : 0;
+    paginaActual = (paginaActual < paginasManuales.length - 1) ? paginaActual + 1 : 0;
     mostrarPantalla(paginaActual);
 };
 
@@ -68,8 +48,8 @@ const retroceder = () => {
     }
 };
 
-loopBtn.onclick = avanzarOBuclerear;
-prevBtn.onclick = retroceder;
+if (loopBtn) loopBtn.onclick = avanzarOBuclerear;
+if (prevBtn) prevBtn.onclick = retroceder;
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight' || e.key === 'Enter' || e.key === ' ') {
@@ -82,4 +62,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-mostrarPantalla(paginaActual);
+// Arranca el sistema cuando todo el contenido esté cargado
+window.addEventListener('load', () => {
+    mostrarPantalla(paginaActual);
+});
