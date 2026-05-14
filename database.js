@@ -83,5 +83,31 @@ const paginasManuales = [
             { sku: "R146125", nombre: "100 TACOS LOCK BLANCOS" },
             { sku: "R124545", nombre: "CINTA S/ PEGAMENTO BLANCA" }
         ]
+    },
+{
+        titulo: "CAÑERÍA RÍGIDA EN TIRA PARTE 1",
+        productos: [
+            { sku: "R567360", nombre: "CAÑO RIGIDO EN TIRA X KG 1/4\"" },
+            { sku: "R567361", nombre: "CAÑO RIGIDO EN TIRA X KG 3/8\"" },
+            { sku: "R567362", nombre: "CAÑO RIGIDO EN TIRA X KG 1/2\"" },
+            { sku: "R567363", nombre: "CAÑO RIGIDO EN TIRA X KG 5/8\"" },
+            { sku: "R567364", nombre: "CAÑO RIGIDO EN TIRA X KG 3/4\"" },
+            { sku: "R567365", nombre: "CAÑO RIGIDO EN TIRA X KG 7/8\"" },
+            { sku: "R567366", nombre: "CAÑO RIGIDO EN TIRA X KG 1\"" },
+            { sku: "R567367", nombre: "CAÑO RIGIDO EN TIRA X KG 1 1/8\"" },
+            { sku: "R567368", nombre: "CAÑO RIGIDO EN TIRA X KG 1 1/4\"" }
+        ]
+    },
+    {
+        titulo: "CAÑERÍA RÍGIDA EN TIRA PARTE 2",
+        productos: [
+            { sku: "R567369", nombre: "CAÑO RIGIDO EN TIRA X KG 1 3/8\"" },
+            { sku: "R567370", nombre: "CAÑO RIGIDO EN TIRA X KG 1 1/2\"" },
+            { sku: "R567371", nombre: "CAÑO RIGIDO EN TIRA X KG 1 5/8\"" },
+            { sku: "R567372", nombre: "CAÑO RIGIDO EN TIRA X KG 2 1/8\"" }
+        ]
     }
+
+
+    
 ];
