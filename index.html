@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CIMER - Panel de Escaneo</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <img src="https://i.postimg.cc/CxVsPX0c/Logo-Cimer-01.png" alt="Logo CIMER" id="main-logo">
+        <h1 id="seccion-titulo">CARGANDO...</h1>
+        <div class="page-info"><span id="page-label">PANTALLA 1</span></div>
+    </header>
+
+    <main id="barcode-grid">
+    </main>
+
+    <nav class="navigation">
+        <button id="prevBtn" class="nav-btn-sec">⬅ VOLVER</button>
+        <button id="loopBtn" class="nav-btn-main">SIGUIENTE / REINICIAR ↻</button>
+    </nav>
+
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
