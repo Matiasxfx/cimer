@@ -11,9 +11,9 @@ const paginasManuales = [
             { sku: "R782070", nombre: "CABLES 5 X 1.5" },
             { sku: "R767802", nombre: "MANGUERA CRISTAL X MT 14X18"   },
             { sku: "R124545", nombre: "CINTA S/ PEGAMENTO BLANCA" },
-               { sku: "R782070", nombre: "CABLES 5 X 1.5" },
-            { sku: "R767802", nombre: "MANGUERA CRISTAL X MT 14X18"   },
-            { sku: "R124545", nombre: "CINTA S/ PEGAMENTO BLANCA" }
+            { sku: "R767803", nombre: "MANGUERA CRISTAL X MT 16X20"  },
+            { sku: "R146127", nombre: "TACO LOCK POR  UNIDAD SARSA"   },
+            { sku: "R243008", nombre: "PRECINTOS POR UNIDAD BLANCO 20 CM" }
            
         ]
     },
